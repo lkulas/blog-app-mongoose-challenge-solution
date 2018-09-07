@@ -40,15 +40,19 @@ function tearDownDb() {
 }
 
 describe('BlogPosts API resource', function() {
+
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
 	});
+
 	beforeEach(function() {
 		return seedBlogData();
 	});
+
 	afterEach(function() {
 		return tearDownDb();
 	});
+
 	after(function() {
 		return closeServer();
 	});
@@ -68,6 +72,7 @@ describe('BlogPosts API resource', function() {
 					expect(res.body).to.have.lengthOf(count);
 				});
 		});
+
 		it('should return posts with correct fields', function() {
 			let resBlogPost;
 			return chai.request(app)
@@ -90,6 +95,33 @@ describe('BlogPosts API resource', function() {
 					expect(resBlogPost.title).to.equal(post.title);
 					expect(resBlogPost.content).to.equal(post.content);
 					expect(resBlogPost.author).to.contain(post.author.firstName, post.author.lastName);
+				});
+		});
+	});
+
+	describe('POST endpoint', function() {
+		it('should add a new post', function() {
+			const newPost = generateBlogData();
+			return chai.request(app)
+				.post('/posts')
+				.send(newPost)
+				.then(function(res) {
+					expect(res).to.have.status(201);
+					expect(res).to.be.json;
+					expect(res.body).to.be.a('object');
+					expect(res.body).to.include.keys(
+						'title', 'author', 'content', 'created');
+					expect(res.body.title).to.equal(newPost.title);
+					expect(res.body.id).to.not.be.null;
+					expect(res.body.author).to.contain(newPost.author.firstName, newPost.author.lastName);
+					expect(res.body.content).to.equal(newPost.content);
+					return BlogPost.findById(res.body.id);
+				})
+				.then(function(post) {
+					expect(post.title).to.equal(newPost.title);
+					expect(post.content).to.equal(newPost.content);
+					expect(post.author.firstName).to.equal(newPost.author.firstName);
+					expect(post.author.lastName).to.equal(newPost.author.lastName);
 				});
 		});
 	});
