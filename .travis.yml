@@ -1,0 +1,12 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: QzcWzAWjPMUSM/R5vyaSxIWiIhvEDNTRg42hLYsr0zmtrrW0jC3KsdJw/UNTDD3qPdNwy/obVKhtli5Wb32MAdsHbm65i9gXpiFZoL9ZU22WGbhZrhvV7rlfLNcKgDg3M6S9RoeU5CrG/iZ0/2sJ9xfWpUGcHmszvnezlGZgK6wkFTYJGUV1XyL0YiYcIT+e+xr+uzUEs/h+pYW8wgHUlUYTtdYSYS+scP+R2tSXtU4QYzI2cUKbkXa00Z+0CRenzE3cTP4WT2kanM0QU2aoWYaNG/eRu2EIJ+p08ah74FXptO589ikQSogtlAv0gnuKX1Q+TZU4oylefZuSS/oAuTzQMYkjpAm+VDqo5PL10sP7JZAinXCT62ptmNaKkff1lmlduqB9KFOnULCrhfKho44dxhabkxWZLlpmFhBHxzkjh2PfDvI4oQyEaxJwQ6Oz00iR0BP3pbDcL/4JvQZIba/sK9dCaohAEZD7oPSivG9mN1Af7w8B8NktrKFIhdMjR1WdkJIjlveUek4/+lwqVnmJjvS6tHiZjMLRuuuRTBWWFFMhVwBointhoTxAEUIpU28Jx182UQKrFVYoUQobx5Ss4eAXuXg5/2NT4HuONbbsqlAei+cze0ekWlv8k9alorqMWTsgq/59fgzugXZu4Vqt3OLpzxD0Hps+AHuXY4g=
+  app: https://morning-hamlet-80861.herokuapp.com/
+  on:
+    repo: lkulas/blog-app-mongoose-challenge-solution
+    branch: tests
