@@ -19,4 +19,16 @@ function seedBlogData() {
 		seedData.push(generateBlogData());
 	}
 	return BlogPost.insertMany(seedData);
-}
+};
+
+function generateBlogData() {
+	return {
+		title: faker.lorem.sentence(),
+		content: faker.lorem.paragraph(),
+		author: {
+			firstName: faker.name.firstName(),
+			lastName: faker.name.lastName()
+		},
+		created: faker.date.past()
+	};
+};
